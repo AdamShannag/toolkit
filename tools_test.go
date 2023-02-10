@@ -93,9 +93,10 @@ func TestTools_UploadFiles(t *testing.T) {
 		if err != nil && !e.errorExpected {
 			t.Error(err)
 		}
+
 		if !e.errorExpected {
 			if _, err := os.Stat(fmt.Sprintf("./testdata/uploads/%s", uploadedFiles[0].NewFileName)); os.IsNotExist(err) {
-				t.Errorf("%s:, expected file to exist: %s", e.name, err.Error())
+				t.Errorf("%s: expected file to exist: %s", e.name, err.Error())
 			}
 
 			// clean up
@@ -159,4 +160,20 @@ func TestTools_UploadOneFile(t *testing.T) {
 	// clean up
 	_ = os.Remove(fmt.Sprintf("./testdata/uploads/%s", uploadedFile.NewFileName))
 
+}
+
+func TestTools_CreateDirIfNotExists(t *testing.T) {
+	var testTool Tools
+
+	err := testTool.CreateDirIfNotExists("./testdata/myDir")
+	if err != nil {
+		t.Error(err)
+	}
+
+	err = testTool.CreateDirIfNotExists("./testdata/myDir")
+	if err != nil {
+		t.Error(err)
+	}
+
+	_ = os.Remove("./testdata/myDir")
 }
