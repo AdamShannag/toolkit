@@ -35,7 +35,7 @@ func TestTools_PushJSONToRemote(t *testing.T) {
 		// Test Request Parameters
 		return &http.Response{
 			StatusCode: http.StatusOK,
-			Body:       io.NopCloser(bytes.NewBufferString("ok")),
+			Body:       ioutil.NopCloser(bytes.NewBufferString("ok")),
 			Header:     make(http.Header),
 		}
 	})
