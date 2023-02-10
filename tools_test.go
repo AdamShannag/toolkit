@@ -8,6 +8,7 @@ import (
 	"image"
 	"image/png"
 	"io"
+	"io/ioutil"
 	"mime/multipart"
 	"net/http"
 	"net/http/httptest"
@@ -248,7 +249,7 @@ func Test_Tools_DownloadStaticFile(t *testing.T) {
 		t.Error("wrong content disposition")
 	}
 
-	_, err := io.ReadAll(res.Body)
+	_, err := ioutil.ReadAll(res.Body)
 	if err != nil {
 		t.Error(err)
 	}
